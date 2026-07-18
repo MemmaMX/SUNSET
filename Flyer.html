@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <title>COCKTAIL SUNSET | FLYER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #FCFCE3;
+      font-family: "Poppins", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .layout {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      justify-items: center;
+      padding: 40px;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      width: 100%;
+    }
+
+    .left h2 {
+      color: #0C2C55;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-circle {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: none;
+      background: #0A8274;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(10, 130, 116, 0.35);
+      transition: width 0.45s cubic-bezier(0.34, 1.8, 0.64, 1),
+                  height 0.45s cubic-bezier(0.34, 1.8, 0.64, 1),
+                  border-radius 0.45s ease,
+                  background 0.35s ease,
+                  box-shadow 0.35s ease,
+                  transform 0.35s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .btn-circle:hover {
+      transform: scale(1.12);
+      box-shadow: 0 14px 35px rgba(10, 130, 116, 0.5);
+    }
+
+    .btn-circle.copied {
+      width: 150px;
+      height: 54px;
+      border-radius: 60px;
+      background: #00BFFF;
+      box-shadow: 0 0 20px rgba(0, 191, 255, 0.7),
+                  0 0 45px rgba(0, 191, 255, 0.45),
+                  0 8px 20px rgba(0, 191, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .right h2 {
+      color: #0C2C55;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    .card-wrapper {
+      width: 360px;
+      height: 540px;
+      position: relative;
+      border-radius: 24px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card-wrapper:hover {
+      transform: scale(1.04) translateY(-8px);
+    }
+
+    #card {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      transition: transform 0.15s ease-out,
+                  box-shadow 0.4s ease,
+                  filter 0.4s ease;
+      position: relative;
+      background: #ffffff;
+    }
+
+    .card-wrapper:hover #card {
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+      filter: brightness(1.1) saturate(1.05);
+    }
+
+    #card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 24px;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      border-radius: 24px;
+      cursor: grab;
+    }
+
+    .card-overlay:active {
+      cursor: grabbing;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .card-wrapper {
+        width: 300px;
+        height: 450px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <div class="left">
+      <h2>Copia y pega el mensaje</h2>
+      <div class="buttons">
+        <button class="btn-circle" id="btn-en" data-original="Inglés">Inglés</button>
+        <button class="btn-circle" id="btn-es" data-original="Español">Español</button>
+      </div>
+    </div>
+
+    <div class="right">
+      <h2>Arrastra la imagen y suelta</h2>
+      <div class="card-wrapper" id="card-wrapper">
+        <div id="card">
+          <img
+            id="flyer"
+            src="https://lh3.googleusercontent.com/d/1aQz3pkG9wEWtK5YUkE3Zm40Gm8kBSi7p"
+            alt="Flyer COCKTAIL SUNSET">
+          <div class="card-overlay" id="card-overlay" draggable="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TEXTS = {
+      en: `Dear Guest, Looking for the perfect Friday plan? 🌅
+
+This Friday, July 17th, we invite you to our exclusive Sunset Cocktail experience at JOIA Paraíso. Join us to enjoy premium drinks and the best golden hour views of the resort. 🥂
+We would be happy to receive you!`,
+
+      es: `Estimado huésped, ¿Busca el plan perfecto para el viernes? 🌅
+
+Este viernes 17 de julio, lo invitamos a nuestra exclusiva experiencia de cócteles al atardecer en JOIA Paraíso. Acompáñenos a disfrutar de bebidas premium y las mejores vistas del resort al atardecer. 🥂
+¡Nos encantaría recibirl!`
+    };
+
+    async function copyText(lang, btn) {
+      try {
+        await navigator.clipboard.writeText(TEXTS[lang]);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = TEXTS[lang];
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+
+      const original = btn.dataset.original;
+      btn.textContent = 'Copiado';
+      btn.classList.add('copied');
+
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.textContent = original;
+      }, 1400);
+    }
+
+    document.getElementById('btn-en').addEventListener('click', function() { copyText('en', this); });
+    document.getElementById('btn-es').addEventListener('click', function() { copyText('es', this); });
+
+    const card = document.getElementById('card');
+    const wrapper = document.getElementById('card-wrapper');
+    const overlay = document.getElementById('card-overlay');
+    const flyer = document.getElementById('flyer');
+
+    wrapper.addEventListener('mousemove', function(e) {
+      const rect = wrapper.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    wrapper.addEventListener('mouseleave', function() {
+      card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+
+    overlay.addEventListener('dragstart', function(e) {
+      e.dataTransfer.effectAllowed = 'copy';
+      e.dataTransfer.setData('text/uri-list', flyer.src);
+      e.dataTransfer.setData('text/plain', flyer.src);
+      e.dataTransfer.setData('text/html', '<img src="' + flyer.src + '">');
+
+      try {
+        e.dataTransfer.setDragImage(flyer, flyer.naturalWidth / 2, flyer.naturalHeight / 2);
+      } catch (err) {}
+    });
+  </script>
+
+</body>
+</html>
