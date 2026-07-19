@@ -235,7 +235,7 @@ function prepararHoja(sheet, linkValue) {
   linkRange.setHorizontalAlignment('left');
   linkRange.setVerticalAlignment('middle');
   linkRange.setFontSize(11);
-  linkRange.setBorder(true, true, true, true, null, null, '#BBBBBB', SpreadSheetApp.BorderStyle.SOLID);
+  linkRange.setBorder(true, true, true, true, null, null, '#BBBBBB', SpreadsheetApp.BorderStyle.SOLID);
 }
 
 function limpiarAreaTabla(sheet) {
