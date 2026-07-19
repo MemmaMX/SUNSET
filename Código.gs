@@ -11,7 +11,9 @@ const CONFIG = {
   COL_INICIO: 2,
   ROWS_PER_BLOCK: 29,
   COL_GAP: 1,
-  URL_WEB_APP: 'https://script.google.com/a/macros/iberostar.com/s/AKfycbxyGOheNRg1h1DLUKEy6uY6S_OCmg0OdILhf6Jdc53gpP48MDfsi50K4NxbjeAAk_oB/exec'
+  URL_WEB_APP: 'https://script.google.com/a/macros/iberostar.com/s/AKfycbxyGOheNRg1h1DLUKEy6uY6S_OCmg0OdILhf6Jdc53gpP48MDfsi50K4NxbjeAAk_oB/exec',
+  FLYER_WIDTH: 700,
+  FLYER_HEIGHT: 1100
 };
 
 function onOpen() {
@@ -44,6 +46,11 @@ function actualizarTablaActual() {
 }
 
 function abrirFlyer() {
+  const w = CONFIG.FLYER_WIDTH;
+  const h = CONFIG.FLYER_HEIGHT;
+  const left = Math.max(0, (screen.availWidth - w) / 2);
+  const top = Math.max(0, (screen.availHeight - h) / 2);
+
   const html = `
     <!DOCTYPE html>
     <html>
@@ -53,7 +60,7 @@ function abrirFlyer() {
         window.open(
           '${CONFIG.URL_WEB_APP}',
           'FlyerWindow',
-          'width=1100,height=800,left=150,top=80,resizable=yes,scrollbars=yes'
+          'width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes'
         );
         google.script.host.close();
       <\/script>
@@ -228,7 +235,7 @@ function prepararHoja(sheet, linkValue) {
   linkRange.setHorizontalAlignment('left');
   linkRange.setVerticalAlignment('middle');
   linkRange.setFontSize(11);
-  linkRange.setBorder(true, true, true, true, null, null, '#BBBBBB', SpreadsheetApp.BorderStyle.SOLID);
+  linkRange.setBorder(true, true, true, true, null, null, '#BBBBBB', SpreadSheetApp.BorderStyle.SOLID);
 }
 
 function limpiarAreaTabla(sheet) {
